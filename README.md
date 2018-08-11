@@ -4,7 +4,7 @@
 
 Il permet aussi d'interpréter ces liens pour les rediriger vers votre instance web favorite de Cesium (ou autre).
 
-Bien sûr, des applications hors navigateur (cesium-app, sakia...) peuvent interpréter ces liens et s'enregistrer comme logiciel de référence auprès de votre navigateur pour être utilisé pour interpréter ces liens a la place d'une instance web.
+Bien sûr, des applications hors navigateur (cesium-app, sakia...) peuvent interpréter ces liens et s'enregistrer comme logiciel de référence auprès de votre navigateur pour interpréter ces liens à la place d'une instance web.
 
 ## Pourquoi faire ?
 
@@ -18,11 +18,11 @@ Tous les liens doivent commencer par : `g1://`
 
 Il peut ensuite y avoir un ou plusieurs bloc de sens séparés par des `/`.
 
-un bloc de sens peut être :
+Un bloc de sens peut être :
 - une référence à un compte (clef publique encodée en base58 ou uid s'il n'entre pas en collision avec une commande, ou autre name service dans le futur)
 - une commande suivie de ses éventuels paramètres et sous-commandes séparés par `:` .
 
-liste de commandes avec leur syntaxe :
+Liste de commandes avec leur syntaxe :
 - `pubkey:<pubkey>` désigne un compte spécifique par sa clef publique
 - `uid:<uid>` désigne un compte spécifique par son uid (sans problème de collision)
 - `ns:<ns>` désigne un compte spécifique par un système de name service à inventer.
@@ -42,25 +42,31 @@ liste de commandes avec leur syntaxe :
 
 ## Recommandations
 
-Les clients lourds sont encouragés à gérer les protocoles : `g1:`, `g1://` et `g1app://`.
+Les clients lourds (plus particulièrement) sont encouragés à gérer les protocoles : `g1:`, `g1://` et `g1app://`.
 
 Pourquoi ?
 
-Les deux premières syntaxes pour accepter une syntaxe compacte pour les QRCode par exemple, ainsi qu'une syntaxe plus explicite facile à linkifier sans faux-positif.
+- `g1:` pour accepter une syntaxe compacte, pour les QR-Code par exemple.
+- `g1://` pour fournir une syntaxe plus explicite facile à linkifier sans faux-positif.
+- `g1app://` pour permettre à des applications (web) intermédiaires d'être activées par les liens `g1:` et `g1://`. Ces dernières génèrereaient des liens `g1app://` qui seraient associés à l'application finale capable d'interagir avec la blockchain Ǧ1.
 
-La syntaxe `g1app://` est destinée à permettre à des applications (web) intermédiaires d'être activées par des liens `g1:` et `g1://` qui enrichierait/décorerait ces liens avant de les transmettre en générant un lien `g1app://` à une application finale capable d'interaction avec la blockchain g1.
 
 **Exemple d'usage :**
 
-Alice a choisi d'utiliser une application de pourboire pour augmenter automatiquement chacune de ses transactions de pourboire spécifique à destination des développeurs et de rémuniter.
+Alice a choisi d'utiliser AutoTip comme application intermédiaire associée aux liens `g1:` et `g1://`.
+
+Elle a configuré cette application pour ajouter à chacune de ses transactions deux pourboires : 9% supplémentaires pour l'équipe de développeurs de Duniter, et 1% supplémentaire pour rémuniter.
+
 - Alice clique sur le lien : `g1://pay:100:to:<wallet>`
-- Son application de pourboire s'active et transforme le lien en : `g1app://pay:100:to:<wallet>/tip:9:<devTeamPubKey>/tip:1:<remuniterPubKey>`
+- AutoTip s'active et transforme le lien en : `g1app://pay:100:to:<wallet>/tip:9:<devTeamPubKey>/tip:1:<remuniterPubKey>`
 - ce second lien active Cesium2-desktop pour finaliser la transaction.
 
-Pourquoi cette recommandation est spécifique aux clients lourds (moins essentielle mais tout de même conseillé pour les clients web) ?
+
+<small>
+Pourquoi cette recommandation est spécifique aux clients lourds (moins essentielle mais tout de même conseillée pour les clients web) ?
 
 Un client web pourra être ciblé par l'application intermédiaire (de pourboire dans notre cas) via une url https définie par l'utilisateur exactement comme s'il avait défini cette url https comme cible pour le protocole `g1://` ou `g1app://`.
-
+</small>
 
 ## Ressources techniques :
 [Gestion manuelle d'un custom protocol](https://support.shotgunsoftware.com/hc/en-us/articles/219031308-Launching-applications-using-custom-browser-protocols)
@@ -74,16 +80,16 @@ Un client web pourra être ciblé par l'application intermédiaire (de pourboire
 
 tipay propose :
 - bouton vers g1://
-- bouton vers pages suivantes avec montant prédéfini.
-- page de répartition d'un montant fixe entre bénéficiaires prédéfini. (total cadenassé, bénéficiaire non extensible, répartition libre avec réglage par défaut)
-- page d'augmentation du paiement fixe défini avec des tips/dons ajustable, proposé par le vendeur, et extensible. (bénéficiaire de base cadenassé, montant de base cadenassé, reste libre avec réglage par défaut)
+- bouton vers pages suivantes avec montant prédéfini
+- page de répartition d'un montant fixe entre bénéficiaires prédéfinis (total cadenassé, bénéficiaire non extensible, répartition libre avec réglage par défaut)
+- page d'augmentation du paiement fixe défini avec des tips/dons ajustable, proposé par le vendeur, et extensible (bénéficiaire de base cadenassé, montant de base cadenassé, reste libre avec réglage par défaut)
 - page prix libre (réglage par défaut sans aucun cadenas)
-- toutes ces pages, a validation génère un lien g1://
-- toutes ces pages propose : "Envie de contribuer à chaque transaction ?" -> liens vers autotip.
+- toutes ces pages, à validation génère un lien g1://
+- toutes ces pages proposent : "Envie de contribuer à chaque transaction ?" -> liens vers autotip.
 
 autotip propose :
 - de servir d'application pour traiter les liens g1://
-- une page de configuration des autotips (choix des bénficiaires, du taux pour chacun, supprimer, ajouter, afficher un récapitulatif personnalisable à chaque transaction ou ajouter silentieusement les tips)
+- une page de configuration des autotips (choix des bénéficiaires, du taux pour chacun, supprimer, ajouter, afficher un récapitulatif personnalisable à chaque transaction ou ajouter silentieusement les tips)
 - une page de confimation personnalisable (g1->tipay->g1app)
 
  
