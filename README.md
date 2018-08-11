@@ -63,9 +63,9 @@ Elle a configuré cette application pour ajouter à chacune de ses transactions 
 
 
 <small>
-Pourquoi cette recommandation est spécifique aux clients lourds (moins essentielle mais tout de même conseillée pour les clients web) ?
+*Pourquoi cette recommandation est spécifique aux clients lourds (moins essentielle mais tout de même conseillée pour les clients web) ?*
 
-Un client web pourra être ciblé par l'application intermédiaire (de pourboire dans notre cas) via une url https définie par l'utilisateur exactement comme s'il avait défini cette url https comme cible pour le protocole `g1://` ou `g1app://`.
+*Un client web pourra être ciblé par l'application intermédiaire (de pourboire dans notre cas) via une url https définie par l'utilisateur exactement comme s'il avait défini cette url https comme cible pour le protocole `g1://` ou `g1app://`.*
 </small>
 
 ## Ressources techniques :
