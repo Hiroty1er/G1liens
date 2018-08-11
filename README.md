@@ -16,24 +16,24 @@ Bien sûr, des applications hors navigateur (cesium-app, sakia...) peuvent inter
 
 Tous les liens doivent commencer par : `g1://` 
 
-Il peut ensuite y avoir un ou plusieurs bloc de sens séparé par des `/`.
+Il peut ensuite y avoir un ou plusieurs bloc de sens séparés par des `/`.
 
-un bloc de sens peut etre :
+un bloc de sens peut être :
 - une référence à un compte (clef publique encodée en base58 ou uid s'il n'entre pas en collision avec une commande, ou autre name service dans le futur)
-- une commande suivi de ses éventuels paramètres et sous-commandes séparés par `:` .
+- une commande suivie de ses éventuels paramètres et sous-commandes séparés par `:` .
 
-liste de commande avec leur syntaxe :
+liste de commandes avec leur syntaxe :
 - `pubkey:<pubkey>` désigne un compte spécifique par sa clef publique
 - `uid:<uid>` désigne un compte spécifique par son uid (sans problème de collision)
 - `ns:<ns>` désigne un compte spécifique par un système de name service à inventer.
 - `wallet:<uid or pubkey or ns>` désigne un compte spécifique par son uid ou sa clef publique
 - `pay:<amount>:[to:]<wallet>[:ref:<comment>]` propose le paiement de `<amount>` Ǧ1 à destination de `<wallet>` éventuellement accompagné d'une référence de transaction `<comment>`
-- `tip:<amount>:[to:]<wallet>` propose le paiement d'un pourboir de `<amount>` Ǧ1 à destination de `<wallet>`
-- `balance:<wallet>` affiche le nombre de Ǧ1 actuellement sur ce compte.
+- `tip:<amount>:[to:]<wallet>` propose le paiement d'un pourboire de `<amount>` Ǧ1 à destination de `<wallet>`
+- `balance:<wallet>` affiche le nombre de Ǧ1 actuellement sur ce compte
 - `isBalance:<amount>:on:<wallet>`
-- `isMember:<wallet>` indique le status de membre ou non de `<wallet>`
-- `isSentry:<wallet>` indique le status de membre référent / sentinel du `<wallet>`
-- `isRefer:<wallet>` indique le status de membre référent / sentinel du `<wallet>`
+- `isMember:<wallet>` indique le statut de membre ou non de `<wallet>`
+- `isSentry:<wallet>` indique le statut de membre référent / sentinel du `<wallet>`
+- `isRefer:<wallet>` indique le statut de membre référent / sentinel du `<wallet>`
 - `app:<appName>:args:<appParams>:<appParams>:...`
 - `app:<appName>:b58:<appParamsB58Encoded>`
 - `cesium:<appParams>:<appParams>:...`
@@ -42,27 +42,26 @@ liste de commande avec leur syntaxe :
 
 ## Recommandations
 
-Les clients lourds sont encouragé à gérer les protocols : `g1:`, `g1://` et `g1app://`.
+Les clients lourds sont encouragés à gérer les protocoles : `g1:`, `g1://` et `g1app://`.
 
 Pourquoi ?
 
-Les deux première syntaxe pour accepter une syntaxe compatcte pour les QRCode par exemple, ainsi qu'une syntaxe plus explicite facile à linkifier sans faut-positif.
+Les deux premières syntaxes pour accepter une syntaxe compacte pour les QRCode par exemple, ainsi qu'une syntaxe plus explicite facile à linkifier sans faux-positif.
 
-La syntaxe `g1app://` est destiné à permettre à des applications (web) intermédiaires d'etre activées par des liens `g1:` et `g1://` qui enrichierai/décorerai ces liens avant de les transmettre en générant un lien `g1app://` à une application finale capable d'interaction avec la blockchain g1.
+La syntaxe `g1app://` est destinée à permettre à des applications (web) intermédiaires d'être activées par des liens `g1:` et `g1://` qui enrichierait/décorerait ces liens avant de les transmettre en générant un lien `g1app://` à une application finale capable d'interaction avec la blockchain g1.
 
 **Exemple d'usage :**
 
-Alice à choisi d'utiliser une application de pourboir pour augmenter automatiquement chacune de ses transaction de pourboir spécifique à destinations des développeurs et de rémuniter.
+Alice a choisi d'utiliser une application de pourboire pour augmenter automatiquement chacune de ses transactions de pourboire spécifique à destination des développeurs et de rémuniter.
 - Alice clique sur le lien : `g1://pay:100:to:<wallet>`
-- Son application de pourboir s'active et transforme le lien en : `g1app://pay:100:to:<wallet>/tip:9:<devTeamPubKey>/tip:1:<remuniterPubKey>`
+- Son application de pourboire s'active et transforme le lien en : `g1app://pay:100:to:<wallet>/tip:9:<devTeamPubKey>/tip:1:<remuniterPubKey>`
 - ce second lien active Cesium2-desktop pour finaliser la transaction.
 
-Pourquoi cette recommandation est spécifique au clients lourds (moins essentielle mais tout de meme conseillé pour les clients web) ?
+Pourquoi cette recommandation est spécifique aux clients lourds (moins essentielle mais tout de même conseillé pour les clients web) ?
 
-Un client web pourras etre ciblé par l'application intermédiaire (de pourboir dans notre cas) via une url https défini par l'utilisateur exactement comme s'il avait défini cette url https comme cible pour le protocole `g1://` ou `g1app://`.
+Un client web pourra être ciblé par l'application intermédiaire (de pourboire dans notre cas) via une url https définie par l'utilisateur exactement comme s'il avait défini cette url https comme cible pour le protocole `g1://` ou `g1app://`.
 
 
-tém
 ## Ressources techniques :
 [Gestion manuelle d'un custom protocol](https://support.shotgunsoftware.com/hc/en-us/articles/219031308-Launching-applications-using-custom-browser-protocols)
 
