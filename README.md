@@ -1,6 +1,6 @@
-# Ǧ1lien
+# Ǧ1Lien
 
-Ǧ1lien définit la syntaxe d'url dédiées à la Ǧ1, tel que [g1://pay:100:to:1000i100](g1://pay:100:to:1000i100).
+Ǧ1Lien définit la syntaxe d'url dédiées à la Ǧ1, tel que [g1://pay:100:to:1000i100](g1://pay:100:to:1000i100).
 
 Il permet aussi d'interpréter ces liens pour les rediriger vers votre instance web favorite de Cesium (ou autre).
 
