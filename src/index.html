@@ -1,16 +1,16 @@
 <html>
 <meta charset="UTF-8">
-<a href="g1://plop">g1://plop</a><br/>
-<a href="g1:plip">g1:plip</a><br/>
-<a href="g1://pay:50:to:1000i100">g1://pay:50:to:1000i100</a><br/>
+<a href="web+g1://plop">web+g1://plop</a><br/>
+<a href="web+g1:plip">web+g1:plip</a><br/>
+<a href="web+g1://pay:50:to:1000i100">web+g1://pay:50:to:1000i100</a><br/>
 <script>
     /*
     const cesium = prompt("Indiquez l'url exacte de votre instace cesium préférée :");
-    navigator.registerProtocolHandler("g1",
+    navigator.registerProtocolHandler("web+g1",
         cesium+"#%s",
         "Cesium favori pour la G1");
     */
-    navigator.registerProtocolHandler("g1",
+    navigator.registerProtocolHandler("web+g1",
         "#%s",
         "G1");
     if(window.location.hash){
@@ -20,7 +20,7 @@
         console.log(lien);
         const commands = lien.split('/');
         const generatedCommands = commands.map(tipise);
-        const newLink = 'g1app://'+generatedCommands.join('/');
+        const newLink = 'web+g1app://'+generatedCommands.join('/');
         document.querySelector('a').innerHTML = newLink;
         document.querySelector('a').href = newLink;
     }
