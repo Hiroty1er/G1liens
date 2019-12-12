@@ -50,14 +50,11 @@ function choix_action(lien) {
             break;
     }
 }
-module.exports = choix_action;
+module.exports = choix_action; //indispensable pour passer les tests
 
 
 function pubkey(cle_public) 
-{
-     
-    return "ceci est la clé publique désigné: "+cle_public; 
-} 
+{ return "ceci est la clé publique désigné: "+cle_public; } 
 //module.exports = pubkey;
 
 function uid(uid) 
