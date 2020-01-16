@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+/// traduction du protocole g1:// en https:// vers le noeud principale de césium
 function choix_action(lien) {
 
     argument = lien.split(":");
@@ -54,27 +54,27 @@ module.exports = choix_action; //indispensable pour passer les tests
 
 
 function pubkey(cle_public) 
-{ return "ceci est la clé publique désigné: "+cle_public; } 
+{ return "https://g1.duniter.fr/#/app/wot/"+cle_public+"/"; } 
 //module.exports = pubkey;
 
 function uid(uid) 
-{ return "ceci est l'uid désigné: "+uid; }
+{ return "https://g1.duniter.fr/#/app/wot/"+uid+"/"; }
 //module.exports = uid;
 
 function name_service(name_service) 
-{ return "ceci est le nom de service désigné: "+name_service; } 
+{ } 
 //module.exports = name_service;
 
 function wallet(wallet) 
-{ return "ceci est le porte feuille désigné: "+wallet; } 
+{ return "https://g1.duniter.fr/#/app/wot/"+wallet+"/"; } 
 //module.exports = wallet;
 
-function pay(montant,porte_feuille,commentaire) 
-{ return "je vais payer "+montant+" à "+porte_feuille+" commentaire: "+commentaire; } 
+function pay(montant,pubkey,commentaire) 
+{ return "https://g1.duniter.fr/api/#/v1/payment/"+pubkey+"?amount="+montant+"&comment="+commentaire; } 
 //module.exports = pay;
 
-function tip(montant,porte_feuille,commentaire) 
-{ return "je vais donner "+montant+" à "+porte_feuille+" commentaire: "+commentaire; } 
+function tip(montant,pubkey,commentaire) 
+{ return "https://g1.duniter.fr/api/#/v1/payment/"+pubkey+"?amount="+montant+"&comment="+commentaire; } 
 //module.exports = tip;
 
 function balance(porte_feuille) 
@@ -96,3 +96,19 @@ function isSentry(porte_feuille)
 function isRefer(porte_feuille) 
 { return "Moi je fais comme Sentry mais je m'appel Refer: "+porte_feuille; } 
 //module.exports = isRefer;
+
+//////////////////////////
+////////// VRAC //////////
+//////////////////////////
+
+// fonction UID qui utilise GET
+/*http = new XMLHttpRequest();
+    url = 'https://duniter.g1.1000i100.fr/wot/lookup/'+name_service;
+    http.open("GET",url);
+    http.send();
+
+    http.onreadystatechange=(e)=>{
+        response = http.responseText
+        response = response.substr(response.search("pubkey:"),response.search("uids:"));
+    }
+    return response;*/

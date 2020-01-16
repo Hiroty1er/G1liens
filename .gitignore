@@ -1,7 +1,1 @@
 node_modules
-.idea
-src/index.html
-README.md
-.gitlab-ci.yml
-.gitignore
-.editorconfig
