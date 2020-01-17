@@ -83,7 +83,7 @@ function tip(montant,pubkey,commentaire)
 //module.exports = tip;
 
 ////////////////////////////////////
-// Pas encore disponible sur cesium
+// Pas encore disponible sur cesium Module annexe en cour de dévellopement.
 ////////////////////////////////////
 function name_service(name_service) 
 { } 
