@@ -20,7 +20,7 @@ async function isRefer (wallet) {
       else {return false;}
     }
     else
-    { return "Je n'arrive pas à identifier le propriétaire, pouvez vous être plus précis ?"; }
+    { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
 }
 module.exports.isRefer = isRefer;
 
