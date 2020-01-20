@@ -12,12 +12,15 @@ module.exports.init = init;
 
 async function isRefer (wallet) {
     
-    const apiResult = await get('https://'+globalConf.isRefer+'/wot/lookup/'+wallet);
+    const apiResult = await get('https://'+globalConf.isRefer+'/wot/requirements/'+wallet);
 
-    if (apiResult.results[0].signed.length >= 5)
-    { return true; }
+    if (apiResult.identities.length == 1) // Vérifie si il y a des doublons
+    {
+      if (apiResult.identities[0].isSentry == true) {return true;}
+      else {return false;}
+    }
     else
-    { return false; }
+    { return "Je n'arrive pas à identifier le propriétaire, pouvez vous être plus précis ?"; }
 }
 module.exports.isRefer = isRefer;
 

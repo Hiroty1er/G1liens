@@ -2,7 +2,6 @@
 const app = require('./g1lienToHttp.js');
 
 test("exécute la bonne fonction selon le liens g1:// entré en paramètre", () => {
-
     app.init({
         "pubkey":"g1.le-sou.org",
         "uid":"cesium.g1.1000i100.fr",
