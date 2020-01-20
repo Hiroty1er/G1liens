@@ -1,13 +1,13 @@
 {
-    "pubkey":"g1.duniter.fr",
+    "pubkey":"cesium.g1.1000i100.fr",
     "uid":"cesium.g1.1000i100.fr",
-    "ns":"",
+    "ns":"cesium.g1.1000i100.fr",
     "wallet":"cesium.g1.1000i100.fr",
-    "pay":"g1.duniter.fr",
+    "pay":"cesium.g1.1000i100.fr",
     "tip":"cesium.g1.1000i100.fr",
-    "balance":"",
-    "isBalance":"",
-    "isMember":"",
-    "isSentry":"",
-    "isRefer":""
+    "balance":"cesium.g1.1000i100.fr",
+    "isBalance":"cesium.g1.1000i100.fr",
+    "isMember":"cesium.g1.1000i100.fr",
+    "isSentry":"cesium.g1.1000i100.fr",
+    "isRefer":"cesium.g1.1000i100.fr"
 }

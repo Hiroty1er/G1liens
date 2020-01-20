@@ -1,8 +1,12 @@
 const https = require('https');
 
+// Permet d'initialiser la configuration du nom de domaine que l'on souhaite utiliser
+// Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
+// La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
+
 let globalConf;
-function init(conf){
-    globalConf = conf;
+function init(json={"isRefer":"duniter.g1.1000i100.fr"}){
+    globalConf = json;
 }
 module.exports.init = init;
 
