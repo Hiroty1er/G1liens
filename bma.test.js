@@ -20,20 +20,22 @@ test("extrait et parse les données en provenance du module BMA de 1000i100", as
 
 test("indique le status d'un membre ou non", async () => {
     appMember.init({"isMember":"duniter.g1.1000i100.fr"});
-    expect(await appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).toBe(true);    
-});
-
-test("PTDR", async () => {
-    appMember.init({"isMember":"duniter.g1.1000i100.fr"});
+    expect(await appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).toBe(true);
     expect(await appMember.isMember("Hiroty")).toBe(true);
-});
-
-test("MDR", async () => {
-    appMember.init({"isMember":"duniter.g1.1000i100.fr"});
     expect(await appMember.isMember("D1kmVswU4WzkwgPDZgJv6FzHTEHsxdfHEw9kjEuYMn4z")).toBe(false);
 });
 
-test("test en cas de réponse absurde du serveur", async () => {
+test("Cas d'un liens g1:// mal écris", async () => {
     appMember.init({"isMember":"duniter.g1.1000i100.fr"});
-    expect(await appMember.isMember('é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie')).rejects.toThrow("Error!");
+    await expect(appMember.isMember('é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie')).rejects.toStrictEqual({"statusCode":400,"statusMessage":"Bad Request"});
+    await expect(appRefer.isRefer('é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie')).rejects.toStrictEqual({"statusCode":400,"statusMessage":"Bad Request"});
+});
+
+test("Cas d'un fichier de conf.json mal écris", async () => {
+    appMember.init({
+        "isMember":'ǧ1.money',
+        "isRefer":'é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie'
+    });
+    await expect(appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
+    await expect(appRefer.isRefer("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toThrow();
 });

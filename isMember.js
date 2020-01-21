@@ -12,15 +12,17 @@ module.exports.init = init;
 
 async function isMember (wallet) {
     
-    const apiResult = await get('https://'+globalConf.isMember+'/wot/certified-by/'+wallet);
-    
+    const apiResult = await getJSON('https://'+globalConf.isMember+'/wot/certified-by/'+wallet);
+
     if (apiResult.isMember == true) 
-            { return true; }
-    else    { return false; }
+        { return true; }
+    else if (apiResult.ucode == 1002)
+        { return false;} 
+    else{ return reject(apiResult); }
 }
 module.exports.isMember = isMember;
 
-async function get(url){
+async function getJSON(url){
 
     return new Promise((resolve, reject) =>{
 
@@ -29,14 +31,14 @@ async function get(url){
         let data = '';
         resp.on('data', (chunk) => data += chunk);
         resp.on('end', () => {
-            if (resp.statusCode == 200)
-            {resolve(JSON.parse(data));}
-            else {
-                //reject({statusCode:resp.statusCode,statusMessage:resp.statusMessage});
-                reject("Error!");
-            }
-        });
 
+            try {
+                json = JSON.parse(data);
+                resolve(JSON.parse(data));
+            }
+            catch (err)
+            { reject({statusCode:resp.statusCode,statusMessage:resp.statusMessage}); }
+        });
       }).on("error", (err) => reject(err));
     });
 }

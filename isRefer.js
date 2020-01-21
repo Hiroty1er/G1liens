@@ -25,11 +25,22 @@ async function isRefer (wallet) {
 module.exports.isRefer = isRefer;
 
 async function get(url){
-    return new Promise((resolve, reject) =>{
-      https.get(url, (resp) => {
-        let data = '';
-        resp.on('data', (chunk) => data += chunk);
-        resp.on('end', () => resolve(JSON.parse(data)) );
-      }).on("error", (err) => reject(err) );
-    });
+
+  return new Promise((resolve, reject) =>{
+
+    https.get(url, (resp) => {
+
+      let data = '';
+      resp.on('data', (chunk) => data += chunk);
+      resp.on('end', () => {
+          if (resp.statusCode == 200) {
+              resolve(JSON.parse(data));}
+          else if (resp.statusCode == 500) {
+              resolve(JSON.parse(data));}
+          else {
+              reject({statusCode:resp.statusCode,statusMessage:resp.statusMessage}); }
+      });
+
+    }).on("error", (err) => reject(err));
+  });
 }
