@@ -1,4 +1,4 @@
-const https = require('https');
+const get = require('./getJSON.js');
 
 // Permet d'initialiser la configuration du nom de domaine que l'on souhaite utiliser
 // Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
@@ -12,7 +12,7 @@ module.exports.init = init;
 
 async function isRefer (wallet) {
     
-    const apiResult = await get('https://'+globalConf.isRefer+'/wot/requirements/'+wallet);
+    const apiResult = await get.json('https://'+globalConf.isRefer+'/wot/requirements/'+wallet);
 
     if (apiResult.identities.length == 1) // Vérifie si il y a des doublons
     {
@@ -23,24 +23,3 @@ async function isRefer (wallet) {
     { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
 }
 module.exports.isRefer = isRefer;
-
-async function get(url){
-
-  return new Promise((resolve, reject) =>{
-
-    https.get(url, (resp) => {
-
-      let data = '';
-      resp.on('data', (chunk) => data += chunk);
-      resp.on('end', () => {
-          if (resp.statusCode == 200) {
-              resolve(JSON.parse(data));}
-          else if (resp.statusCode == 500) {
-              resolve(JSON.parse(data));}
-          else {
-              reject({statusCode:resp.statusCode,statusMessage:resp.statusMessage}); }
-      });
-
-    }).on("error", (err) => reject(err));
-  });
-}

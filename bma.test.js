@@ -32,10 +32,9 @@ test("Cas d'un liens g1:// mal écris", async () => {
 });
 
 test("Cas d'un fichier de conf.json mal écris", async () => {
-    appMember.init({
-        "isMember":'ǧ1.money',
-        "isRefer":'é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie'
-    });
+    appMember.init({"isMember":'ǧ1.money'});
+    appRefer.init({"isRefer":'é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie'});
+
     await expect(appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
-    await expect(appRefer.isRefer("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toThrow();
+    expect(await appRefer.isRefer("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
 });
