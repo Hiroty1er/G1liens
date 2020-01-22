@@ -17,7 +17,8 @@ async function json(url) {
             }).on("error", (err) => reject(err));
         } catch (err) { reject(err);}
     });
-}module.exports.json = json;
+}
+module.exports.json = json;
 
 function json_check(data) {
     return JSON.parse(data);

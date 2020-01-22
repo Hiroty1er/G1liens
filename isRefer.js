@@ -14,7 +14,7 @@ async function isRefer (wallet) {
     
     const apiResult = await get.json('https://'+globalConf.isRefer+'/wot/requirements/'+wallet);
 
-    if (apiResult.identities.length == 1) // Vérifie si il y a des doublons
+    if (apiResult.identities.length == 1) // Vérifie si il y a des doublons, deux identités retourné
     {
       if (apiResult.identities[0].isSentry == true) {return true;}
       else {return false;}

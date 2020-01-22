@@ -1,6 +1,18 @@
 const appRefer = require('./isRefer.js');
 const appMember = require('./isMember.js');
 
+jest.mock('./getJSON.js');
+const https = require('./getJSON.js');
+
+json.mockImplementation((url) => {
+
+    if (str.split(url) {
+
+    }
+
+    if (url == "https://*/2sZF6j2PkxBDNAqUde7Dgo5x3crkerZpQ4rBqqJGn8QT"
+});
+
 test("extrait et parse les données en provenance du module BMA de g1.le.sou.org", async () => {
     appRefer.init({"isRefer":"g1.le-sou.org"});
     expect(await appRefer.isRefer("2sZF6j2PkxBDNAqUde7Dgo5x3crkerZpQ4rBqqJGn8QT")).toBe(true);
