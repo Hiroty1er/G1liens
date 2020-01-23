@@ -9,7 +9,7 @@ async function json(url) {
                 resp.on('data', (chunk) => data += chunk);
                 resp.on('end', () => {
 
-                    try { resolve(json_check(data)); }
+                    try { resolve(JSON.parse(data)); }
                     catch (err) { reject({statusCode:resp.statusCode,statusMessage:resp.statusMessage}); }
                 
                 });
@@ -19,7 +19,3 @@ async function json(url) {
     });
 }
 module.exports.json = json;
-
-function json_check(data) {
-    return JSON.parse(data);
-}

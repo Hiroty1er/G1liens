@@ -6,8 +6,6 @@
 // Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
 // La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
 
-g1://pay:50:to:1000i100
-
 let globalConf;
 function init(
     json={  //configuration par défaut
