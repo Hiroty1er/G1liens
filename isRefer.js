@@ -19,7 +19,8 @@ async function isRefer (wallet) {
       if (apiResult.identities[0].isSentry == true) {return true;}
       else {return false;}
     }
-    else
+    else if (apiResult.identities.length > 1)
     { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
+    else { return apiResult; }
 }
 module.exports.isRefer = isRefer;

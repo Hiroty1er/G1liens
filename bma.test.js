@@ -22,31 +22,31 @@ get.json.mockImplementation((url) => {
 
         api_json = {
             "certified-by":{
-                "Hiroty":'{"isMember": true}',
-                "Millicent":'{"isMember": true}',
-                "Yannick":'{"ucode": 1002}'            
+                "Hiroty":{"isMember": true},
+                "Millicent":{"isMember": true},
+                "Yannick":{"ucode": 1002}            
             },
             "requirements":{
-                "Hiroty":'{"identities":[{"isSentry"=false}]}',
-                "Millicent":'{"identities":[{"isSentry"=true}]}',
-                "Yannick":'{"identities":[{"isSentry"=false},{"isSentry"=true}]}'
+                "Hiroty":{"identities":[{"isSentry":false}]},
+                "Millicent":{"identities":[{"isSentry":true}]},
+                "Yannick":{"identities":[{"isSentry":false},{"isSentry":true}]}
             }
         };
 
         if (id == '2sZF6j2PkxBDNAqUde7Dgo5x3crkerZpQ4rBqqJGn8QT' || id == '1000i100')
-        { return JSON.parse(api_json[order].Millicent); }
+        { return api_json[order].Millicent; }
 
         else if (id == 'D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg' || id == 'Hiroty')
-        { return JSON.parse(api_json[order].Hiroty); }
+        { return api_json[order].Hiroty; }
 
         else if (id == 'D1kmVswU4WzkwgPDZgJv6FzHTEHsxdfHEw9kjEuYMn4z' || id == 'Yannick')
-        { return JSON.parse(api_json[order].Yannick); }
+        { return api_json[order].Yannick; }
         else 
         { return "Je suis pas supposé arriver içi"; }
     }
 
     function char_spe (chaine) {
-        if (chaine.includes(['&','%','ǧ'])) {
+        if (chaine.includes('&','%','ǧ')) {
             return true;
         }
     }
