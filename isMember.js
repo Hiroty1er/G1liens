@@ -17,7 +17,6 @@ async function isMember (wallet) {
     if (apiResult.isMember == true) 
         { return true; }
     else if (apiResult.ucode == 1002)
-        { return false;} 
-    else{ throw apiResult; }
+        { return false;}
 }
 module.exports.isMember = isMember;

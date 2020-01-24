@@ -16,11 +16,10 @@ async function isRefer (wallet) {
 
     if (apiResult.identities.length == 1) // Vérifie si il y a des doublons, deux identités retourné
     {
-      if (apiResult.identities[0].isSentry == true) {return true;}
+      if (apiResult.identities[0].isSentry == true) 
+      {return true;}
       else {return false;}
     }
-    else if (apiResult.identities.length > 1)
-    { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
-    else { return apiResult; }
+    else { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
 }
 module.exports.isRefer = isRefer;

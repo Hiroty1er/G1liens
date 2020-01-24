@@ -4,19 +4,22 @@ const appMember = require('./isMember.js');
 jest.mock('./getJSON.js');
 const get = require('./getJSON.js');
 
-get.json.mockImplementation((url) => {
+get.json.mockImplementation(async (url) => {
     
     url = url.split('/')
-    if (char_spe(url[2]) || url[2] == '') {
-        return {"statusCode": 404, "statusMessage": "Not Found"};
 
-    } else if (char_spe(url[5])) {
-        return {"statusCode":400,"statusMessage":"Bad Request"};
-    } 
-    else if (url[4] == 'certified-by' || url[4] == 'requirements') {    
-        return apiResult(url[4],url[5]);
-
-    } else { return "Je suis pas supposé arriver içi"; }
+    return new Promise((resolve, reject) =>{
+        if (char_spe(url[2])) {
+            reject({"statusCode": 404, "statusMessage": "Not Found"});
+    
+        } else if (char_spe(url[5])) {
+            reject({"statusCode":400,"statusMessage":"Bad Request",});
+        } 
+        else if (url[4] == 'certified-by' || url[4] == 'requirements') {    
+            resolve(apiResult(url[4],url[5]));
+    
+        } else { reject("Je suis pas supposé arriver içi"); }
+    });
 
     function apiResult (order,id) {
 
@@ -46,7 +49,7 @@ get.json.mockImplementation((url) => {
     }
 
     function char_spe (chaine) {
-        if (chaine.includes('&','%','ǧ')) {
+        if (chaine.includes('&') || chaine.includes('@')) {
             return true;
         }
     }
@@ -84,9 +87,8 @@ test("Cas d'un liens g1:// mal écris", async () => {
 });
 
 test("Cas d'un fichier de conf.json mal écris", async () => {
-    appMember.init({"isMember":'ǧ1.money'});
+    appMember.init({"isMember":'@'});
     appRefer.init({"isRefer":'é&"(-è_çà)=$*ù€£$*%ù!:/;.,?gros caca moisie'});
-
-    await expect(appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
-    expect(await appRefer.isRefer("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
+    await expect( appMember.isMember("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
+    await expect( appRefer.isRefer("D6Pm9VsPTLqYMwUtcXxXBqdGP9pMXMkd76C1xZXsF3yg")).rejects.toStrictEqual({"statusCode": 404, "statusMessage": "Not Found"});
 });
