@@ -1,12 +1,14 @@
 #!/usr/bin/env node
-/// traduction du protocole g1:// en https:// vers le noeud principale de césium
+const isSentry = require('./isSentry.js');
+const isMember = require('./isMember.js');
 
-// Permet d'initialiser la configuration du nom de domaine que l'on souhaite utiliser
+/// traduction du protocole g1:// en https:// vers un noeud cesium
+
+// La fonction init() permet d'initialiser la configuration du nom de domaine que l'on souhaite utiliser
 // Le format doit être en JSON
 // Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
 // La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
-const isSentry = require('./isSentry.js');
-const isMember = require('./isMember.js');
+
 
 let globalConf;
 function init(
@@ -19,9 +21,9 @@ function init(
             "tip":"cesium.g1.1000i100.fr",
             "balance":"cesium.g1.1000i100.fr",
             "isBalance":"cesium.g1.1000i100.fr",
-            "isMember":"cesium.g1.1000i100.fr",
-            "isSentry":"cesium.g1.1000i100.fr",
-            "isRefer":"cesium.g1.1000i100.fr"
+            "isMember":"duniter.g1.1000i100.fr",
+            "isSentry":"duniter.g1.1000i100.fr",
+            "isRefer":"duniter.g1.1000i100.fr"
         })
 { globalConf = json; }
 module.exports.init = init; //indispensable pour passer les tests
@@ -73,7 +75,7 @@ async function choix_action(lien) {
             return await isSentry.isSentry(argument[1]);
             break;
 
-        case "isRefer":
+        case "isRefer": // est un alias de isSentry
             isSentry.init(globalConf);
             return await isSentry.isSentry(argument[1]);
             break;
