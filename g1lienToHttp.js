@@ -5,6 +5,8 @@
 // Le format doit être en JSON
 // Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
 // La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
+const isSentry = require('./isSentry.js');
+const isMember = require('./isMember.js');
 
 let globalConf;
 function init(
@@ -24,7 +26,7 @@ function init(
 { globalConf = json; }
 module.exports.init = init; //indispensable pour passer les tests
 
-function choix_action(lien) {
+async function choix_action(lien) {
     
     argument = lien.split(":");
 
@@ -62,15 +64,18 @@ function choix_action(lien) {
             break;
         
         case "isMember":
-            return isMember(argument[1]);
+            isMember.init(globalConf);
+            return await isMember.isMember(argument[1]);
             break;
         
         case "isSentry":
-            return isSentry(argument[1]);
+            isSentry.init(globalConf);
+            return await isSentry.isSentry(argument[1]);
             break;
 
         case "isRefer":
-            return isRefer(argument[1]);
+            isSentry.init(globalConf);
+            return await isSentry.isSentry(argument[1]);
             break;
     }
 }
@@ -92,7 +97,7 @@ function tip(montant,pubkey,commentaire)
 { return "https://"+globalConf.tip+"/api/#/v1/payment/"+pubkey+"?amount="+montant+"&comment="+commentaire; } 
 
 ////////////////////////////////////
-// Pas encore disponible sur cesium, module annexe en cour de dévellopement.
+// Pas encore disponible sur cesium, module annexe en cours de dévellopement.
 ////////////////////////////////////
 function name_service(name_service) 
 { } 
@@ -103,11 +108,11 @@ function balance(porte_feuille)
 function isBalance(montant,porte_feuille) 
 { return "Il y a bien "+montant+" Junes sur le porte feuille: "+porte_feuille; } 
 
-function isMember(porte_feuille) 
-{ return "Je n'ai pas encore le status de ce membre: "+porte_feuille; } 
+//function isMember(porte_feuille) 
+//{ return "Je n'ai pas encore le status de ce membre: "+porte_feuille; } 
 
-function isSentry(porte_feuille) 
-{ return "Je n'ai pas encore le status du référent de ce membre: "+porte_feuille; } 
+//function isSentry(porte_feuille) 
+//{ return "Je n'ai pas encore le status du référent de ce membre: "+porte_feuille; } 
 
-function isRefer(porte_feuille) 
-{ return "Moi je fais comme Sentry mais je m'appel Refer: "+porte_feuille; } 
+//function isRefer(porte_feuille) 
+//{ return "Moi je fais comme Sentry mais je m'appel Refer: "+porte_feuille; } 

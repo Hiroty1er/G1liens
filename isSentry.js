@@ -5,14 +5,13 @@ const get = require('./getJSON.js');
 // La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
 
 let globalConf;
-function init(json={"isRefer":"duniter.g1.1000i100.fr"}){
+function init(json={"isSentry":"duniter.g1.1000i100.fr"}){
     globalConf = json;
 }
 module.exports.init = init;
 
-async function isRefer (wallet) {
-    
-    const apiResult = await get.json('https://'+globalConf.isRefer+'/wot/requirements/'+wallet);
+async function isSentry (wallet) {
+    const apiResult = await get.json('https://'+globalConf.isSentry+'/wot/requirements/'+wallet);
 
     if (apiResult.identities.length == 1) // Vérifie si il y a des doublons, deux identités retourné
     {
@@ -22,4 +21,4 @@ async function isRefer (wallet) {
     }
     else { return "Je n'arrive pas à identifier clairement le propriétaire, pouvez vous être plus précis ?"; }
 }
-module.exports.isRefer = isRefer;
+module.exports.isSentry = isSentry;
