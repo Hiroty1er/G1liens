@@ -1,4 +1,3 @@
-
 const app = require('./g1lienToHttp.js');
 
 test("exécute la bonne fonction selon le liens g1:// entré en paramètre", async () => {

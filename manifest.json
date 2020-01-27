@@ -1,0 +1,17 @@
+{
+  "description": "Créer des liens cliquable pour les adresses g1:// dans une page web",
+  "manifest_version": 2,
+  "name": "G1lien",
+  "version": "1.0",
+  "homepage_url": "https://git.duniter.org/Hiroty1er/g1lien",
+  "icons": {
+    "300": "G1lien-logo.png"
+  },
+
+  "content_scripts": [
+    {
+      	"matches": ["<all_urls>"],
+      	"js": ["g1lien.js"]
+    }
+  ]
+}

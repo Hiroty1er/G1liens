@@ -9,7 +9,6 @@ const isMember = require('./isMember.js');
 // Exemple -> {"isRefer":"duniter.g1.1000i100.fr"}
 // La configuration fera pointé la fonction "isRefer" vers le domaine de "duniter.g1.1000i100.fr"
 
-
 let globalConf;
 function init(
     json={  //configuration par défaut
@@ -28,7 +27,7 @@ function init(
 { globalConf = json; }
 module.exports.init = init; //indispensable pour passer les tests
 
-async function choix_action(lien) {
+function choix_action(lien) {
     
     argument = lien.split(":");
 
@@ -66,18 +65,21 @@ async function choix_action(lien) {
             break;
         
         case "isMember":
-            isMember.init(globalConf);
-            return await isMember.isMember(argument[1]);
-            break;
+            // isMember.init(globalConf);
+            // return await isMember.isMember(argument[1]);
+            // break;
         
         case "isSentry":
-            isSentry.init(globalConf);
-            return await isSentry.isSentry(argument[1]);
-            break;
+            // isSentry.init(globalConf);
+            // return await isSentry.isSentry(argument[1]);
+            // break;
 
         case "isRefer": // est un alias de isSentry
-            isSentry.init(globalConf);
-            return await isSentry.isSentry(argument[1]);
+            // isSentry.init(globalConf);
+            // return await isSentry.isSentry(argument[1]);
+            // break;
+        default:
+            return "Le liens g1 ne semble pas correspondre aux actions disponible.";
             break;
     }
 }

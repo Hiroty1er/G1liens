@@ -590,6 +590,7 @@
 				);
 
 				var innerNodes = [];
+				var innerNodes = [];
 
 				for (var i = 0, l = innerPortions.length; i < l; ++i) {
 					var portion = innerPortions[i];
