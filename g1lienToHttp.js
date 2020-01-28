@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-const isSentry = require('./isSentry.js');
-const isMember = require('./isMember.js');
-
 /// traduction du protocole g1:// en https:// vers un noeud cesium
 
 // La fonction init() permet d'initialiser la configuration du nom de domaine que l'on souhaite utiliser
@@ -20,9 +17,9 @@ function init(
             "tip":"cesium.g1.1000i100.fr",
             "balance":"cesium.g1.1000i100.fr",
             "isBalance":"cesium.g1.1000i100.fr",
-            "isMember":"duniter.g1.1000i100.fr",
-            "isSentry":"duniter.g1.1000i100.fr",
-            "isRefer":"duniter.g1.1000i100.fr"
+            "isMember":"localhost:3000",
+            "isSentry":"localhost:3000",
+            "isRefer":"localhost:3000"
         })
 { globalConf = json; }
 module.exports.init = init; //indispensable pour passer les tests
@@ -65,19 +62,17 @@ function choix_action(lien) {
             break;
         
         case "isMember":
-            // isMember.init(globalConf);
-            // return await isMember.isMember(argument[1]);
-            // break;
-        
+            return isMember(argument[1]);
+            break;
+
         case "isSentry":
-            // isSentry.init(globalConf);
-            // return await isSentry.isSentry(argument[1]);
-            // break;
+            return isSentry(argument[1]);
+            break;
 
         case "isRefer": // est un alias de isSentry
-            // isSentry.init(globalConf);
-            // return await isSentry.isSentry(argument[1]);
-            // break;
+            return isSentry(argument[1]);
+            break;
+
         default:
             return "Le liens g1 ne semble pas correspondre aux actions disponible.";
             break;
@@ -100,6 +95,12 @@ function pay(montant,pubkey,commentaire)
 function tip(montant,pubkey,commentaire) 
 { return "https://"+globalConf.tip+"/api/#/v1/payment/"+pubkey+"?amount="+montant+"&comment="+commentaire; } 
 
+function isMember(wallet) 
+{ return globalConf.isMember+'/isMember/'+wallet; } 
+
+function isSentry(wallet) 
+{ return globalConf.isSentry+'/isSentry/'+wallet; }
+
 ////////////////////////////////////
 // Pas encore disponible sur cesium, module annexe en cours de dévellopement.
 ////////////////////////////////////
@@ -112,11 +113,3 @@ function balance(porte_feuille)
 function isBalance(montant,porte_feuille) 
 { return "Il y a bien "+montant+" Junes sur le porte feuille: "+porte_feuille; } 
 
-//function isMember(porte_feuille) 
-//{ return "Je n'ai pas encore le status de ce membre: "+porte_feuille; } 
-
-//function isSentry(porte_feuille) 
-//{ return "Je n'ai pas encore le status du référent de ce membre: "+porte_feuille; } 
-
-//function isRefer(porte_feuille) 
-//{ return "Moi je fais comme Sentry mais je m'appel Refer: "+porte_feuille; } 
